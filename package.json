@@ -1,0 +1,22 @@
+{
+  "name": "fleek-parser",
+  "version": "0.0.1",
+  "description": "A parser for the fleek framework",
+  "main": "lib/parser.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "keywords": [
+    "fleek",
+    "parser",
+    "swagger"
+  ],
+  "engines": {
+    "node": ">= 0.11.16"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "fs": "0.0.2",
+    "lodash": "^3.10.0"
+  }
+}
