@@ -4,7 +4,7 @@
   "description": "A parser for the fleek framework",
   "main": "lib/parser.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha --harmony tests"
   },
   "keywords": [
     "fleek",
@@ -16,7 +16,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "chai": "^3.2.0",
     "fs": "0.0.2",
-    "lodash": "^3.10.0"
+    "lodash": "^3.10.0",
+    "mocha": "^2.2.5"
   }
 }
