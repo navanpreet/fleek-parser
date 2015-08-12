@@ -15,10 +15,11 @@ let result = 'fail';
 // result = swag.find('test.bar')
 
 describe('Unit Tests', function () {
-  let swag = parse('./tests/swagger.json');
 
   describe('Utils', function () {
+
     describe('.find', function () {
+      let swag   = parse('./tests/swagger.json');
       swag.test  = {
         foo : [
           [{ result : 'success 1' }, { result: 'success 2' }],
@@ -50,6 +51,12 @@ describe('Unit Tests', function () {
       it('should find simple property chain ending in array `' + search4 + '`', function () {
         let result = swag.find(search4);
         expect(result).to.deep.equal(swag.test.foo[2]);
+      });
+
+      let search5 = 'custom.object';
+      it('should allow target object to be passed in', function () {
+        let result = swag.find(search5, { custom : { object : true } });
+        expect(result).to.be.true;
       });
     });
   });
