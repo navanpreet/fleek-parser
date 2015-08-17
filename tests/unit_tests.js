@@ -64,16 +64,8 @@ describe('Unit Tests', function () {
 
 
     describe('.routeSet', function () {
-      let swag   = parse('./tests/swagger.json');
-      swag.test  = {
-        foo : [
-          [{ result : 'success 1' }, { result: 'success 2' }],
-          [{ result: 'success 3' }],
-          'lolno'
-        ],
-        bar : 'woop'
-      };
-      let routes = swag.routeSet();
+      let swag          = parse('./tests/swagger.json');
+      let routes        = swag.routeSet();
       let shouldAllHave = function (key, type) {
         _.each(routes, function (val) {
           expect(val[key]).to.be.a(type);
@@ -84,12 +76,18 @@ describe('Unit Tests', function () {
         expect(routes).to.be.an('array');
       });
 
-      it(' has path', function () {       shouldAllHave('path', 'string'); });
-      it(' has method', function () {     shouldAllHave('method', 'string'); });
-      it(' has controller', function () { shouldAllHave('controller', 'string'); });
-      it(' has details', function () {    shouldAllHave('details','object'); });
-
-      console.log(routes)
+      describe('.path', function () { it('is string', function () { shouldAllHave('path', 'string'); }); });
+      describe('.method', function () { it('is string', function () { shouldAllHave('method', 'string'); }); });
+      describe('.controller', function () { it('is string', function () { shouldAllHave('controller', 'string'); }); });
+      describe('.details', function () { it('is object', function () { shouldAllHave('details','object'); }); });
+      describe('.is', function () {
+        it('is function', function () { shouldAllHave('is','function'); });
+        it('returns a boolean', function () {
+          _.each(routes, function (route) {
+            expect(route.is('authenticated')).to.be.a('boolean');
+          });
+        });
+      });
     });
   });
 });
