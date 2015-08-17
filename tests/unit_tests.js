@@ -3,6 +3,7 @@
 let mocha   = require('mocha');
 let expect  = require('chai').expect;
 let parse   = require('./../lib/parser');
+let _       = require('lodash');
 
 // TODO: make into unit test
 
@@ -58,6 +59,37 @@ describe('Unit Tests', function () {
         let result = swag.find(search5, { custom : { object : true } });
         expect(result).to.be.true;
       });
+    });
+
+
+
+    describe('.routeSet', function () {
+      let swag   = parse('./tests/swagger.json');
+      swag.test  = {
+        foo : [
+          [{ result : 'success 1' }, { result: 'success 2' }],
+          [{ result: 'success 3' }],
+          'lolno'
+        ],
+        bar : 'woop'
+      };
+      let routes = swag.routeSet();
+      let shouldAllHave = function (key, type) {
+        _.each(routes, function (val) {
+          expect(val[key]).to.be.a(type);
+        });
+      }
+
+      it('should build an array of route/method objects with expected properties', function () {
+        expect(routes).to.be.an('array');
+      });
+
+      it(' has path', function () {       shouldAllHave('path', 'string'); });
+      it(' has method', function () {     shouldAllHave('method', 'string'); });
+      it(' has controller', function () { shouldAllHave('controller', 'string'); });
+      it(' has details', function () {    shouldAllHave('details','object'); });
+
+      console.log(routes)
     });
   });
 });
