@@ -151,4 +151,5 @@ Quick reference:
 ## Authors
 
 - [John Hofrichter](https://github.com/johnhof)
+- [Lan Nguyen](https://github.com/lan-nguyen91)
 
