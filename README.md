@@ -148,8 +148,18 @@ Quick reference:
 ## Special USE CASE
   Extra property is attached to the returned object to suit fleek-router and fleek-validation usage are:
 
-```javascript
+  - fleek-router:
+    - __sanitizedRoutes property added__
+  - fleek-validation:
+    - __routeValidationMap property added__
+  - fleek-ws:
+    -  __controllers property added__
 
+### Example
+
+```javascript
+  var parser = require('fleek-parser');
+  var swagger = parser.parse(docs);
   console.log(swagger.controllers);
   console.log(swagger.routeValidationMap);
   console.log(swagger.sanitizedRoutes);
