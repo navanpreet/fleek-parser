@@ -14,15 +14,20 @@ Quick reference:
 - [Authors](#authors)
 
 ## Usage
+```javascript
+
   var parser = require('fleek-parser');
 
   //parse document as json object
   var swagger = parser.parse(docs);
 
+  OR
+
   //parse document as a custom path to the file
   var swagger = parser.parse("[PATH]/swagger.json");
 
-    //swagger.json sample
+
+    //your original swagger.json may look like.
     {
       "swagger": "2.0",
       "info": {
@@ -72,12 +77,13 @@ Quick reference:
         }
       }
     }
+```
 
 ## Response Structure
 
 - A fully dereferenced JSON is returned  
 
-```javscript
+```javascript
 {
   {
       "swagger": "2.0",
@@ -142,14 +148,25 @@ Quick reference:
 ## Special USE CASE
   Extra property is attached to the returned object to suit fleek-router and fleek-validation usage are:
 
+  - fleek-router:
+    - __sanitizedRoutes property added__
+  - fleek-validation:
+    - __routeValidationMap property added__
+  - fleek-ws:
+    -  __controllers property added__
+
+### Example
+
 ```javascript
+  var parser = require('fleek-parser');
+  var swagger = parser.parse(docs);
   console.log(swagger.controllers);
   console.log(swagger.routeValidationMap);
-  console.log(swagger.sanitizedRoutes)
+  console.log(swagger.sanitizedRoutes);
+
 ```
 
 ## Authors
 
 - [John Hofrichter](https://github.com/johnhof)
 - [Lan Nguyen](https://github.com/lan-nguyen91)
-
