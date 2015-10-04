@@ -1,170 +1,139 @@
 # Fleek Parser
 
-Parser module that parses swagger documentation and dereference $ref path resolving into full schema object.
+Parser module that parses [swagger documentation](http://swagger.io/) json into a single fully dereferenced object. Acts as the linch pin to the [Fleekjs](https://github.com/fleekjs) environment of micro-utilities.
 
-Quick reference:
-- Best used with the [fleek-router](#usage)
-- Best used with the [fleek-validation](#usage)
+`$ npm install fleek-parser`
 
+Beyond basic JSON parse:
+  - Render all `$ref` within the JSON
+  - Render all `$ref` referring to a separate file - TODO
+  - Merge `allOf` objects - TODO
+  - provide various utilities to access the Swagger document in a non-standard way
 
 ## Key
 
 - [Usage](#usage)
-- [Response Structure](#response-structure)
+  - [Basic](#basic)
+- [Utilities](#utilities)
+- [Reference Material](#reference-material)
+  - [Swagger](#swagger)
 - [Authors](#authors)
 
 ## Usage
+
+### Basic
+
+
+_app.js_
 ```javascript
+var parser = require('fleek-parser');
 
-  var parser = require('fleek-parser');
+// parse stringified JSON as json object
+var swaggerFile = fs.readFileSync('./path/to/swagger.json')
+var swagger     = parser.parse(swaggerFile);
 
-  //parse document as json object
-  var swagger = parser.parse(docs);
+// OR
 
-  OR
-
-  //parse document as a custom path to the file
-  var swagger = parser.parse("[PATH]/swagger.json");
-
-
-    //your original swagger.json may look like.
-    {
-      "swagger": "2.0",
-      "info": {
-        "version": "2.0.0",
-        "title": "Swagger Petstore",
-        "contact": {
-          "name": "Swagger API Team",
-          "url": "http://swagger.io"
-        }
-      },
-      "host": "petstore.swagger.io",
-      "basePath": "/api",
-      "schemes": [
-        "http"
-      ],
-      "paths": {
-        "/pets": {
-          "get": {
-            "tags": [ "Pet Operations" ],
-            "summary": "finds pets in the system",
-            "responses": {
-              "200": {
-                "description": "pet response",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Pet"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "definitions": {
-        "Pet": {
-          "type": "object",
-          "required": [
-            "id"
-          ],
-          "properties": {
-            "id": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        }
-      }
-    }
+// parse JSON file from path
+var swagger = parser.parse("./path/to/swagger.json");
 ```
 
-## Response Structure
-
-- A fully dereferenced JSON is returned  
-
-```javascript
+_swagger.json_
+```JSON
 {
-  {
-      "swagger": "2.0",
-      "info": {
-        "version": "2.0.0",
-        "title": "Swagger Petstore",
-        "contact": {
-          "name": "Swagger API Team",
-          "url": "http://swagger.io"
-        }
-      },
-      "host": "petstore.swagger.io",
-      "basePath": "/api",
-      "schemes": [
-        "http"
-      ],
-      "paths": {
-        "/pets": {
-          "get": {
-            "tags": [ "Pet Operations" ],
-            "summary": "finds pets in the system",
-            "responses": {
-              "200": {
-                "description": "pet response",
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "required": [
-                       "id"
-                    ],
-                    "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                  }
-                }
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0.0",
+    "title": "Swagger Petstore",
+    "contact": {
+      "name": "Swagger API Team",
+      "url": "http://swagger.io"
+    }
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/pets": {
+      "get": {
+        "tags": [ "Pet Operations" ],
+        "summary": "finds pets in the system",
+        "responses": {
+          "200": {
+            "description": "pet response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
               }
-            }
-          }
-        }
-      },
-      "definitions": {
-        "Pet": {
-          "type": "object",
-          "required": [
-            "id"
-          ],
-          "properties": {
-            "id": {
-              "type": "integer",
-              "format": "int64"
             }
           }
         }
       }
     }
+  },
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  }
 }
 ```
 
-## Special USE CASE
-  Extra property is attached to the returned object to suit fleek-router and fleek-validation usage are:
-
-  - fleek-router:
-    - __sanitizedRoutes property added__
-  - fleek-validation:
-    - __routeValidationMap property added__
-  - fleek-ws:
-    -  __controllers property added__
-
-### Example
+#### Dereference example
 
 ```javascript
-  var parser = require('fleek-parser');
-  var swagger = parser.parse(docs);
-  console.log(swagger.controllers);
-  console.log(swagger.routeValidationMap);
-  console.log(swagger.sanitizedRoutes);
-
+console.log(swagger.paths['/pets'].get.responses['200'].schema.items)
+// {
+//   "type": "object",
+//   "required": [
+//     "id"
+//   ],
+//   "properties": {
+//     "id": {
+//       "type": "integer",
+//       "format": "int64"
+//     }
+//   }
+// }
 ```
+
+## Utilities
+
+Additional properties are attached to the result to simplify usage
+
+```javascript
+var parser  = require('fleek-parser');
+var swagger = parser.parse('./swager.json');
+
+console.log(swagger.controllers);
+console.log(swagger.routeValidationMap);
+console.log(swagger.sanitizedRoutes);
+```
+
+
+## Reference Material
+
+### Swagger
+
+- [Home](http://swagger.io/)
+- [Editor Demo](http://editor.swagger.io/)
+- [Documentation](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md)
+
+## By the authors
+
+- [Hart Engineering](http://engineering.hart.com/)
 
 ## Authors
 
