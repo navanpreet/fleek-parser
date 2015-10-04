@@ -2,6 +2,8 @@
 
 Parser module that parses [swagger documentation](http://swagger.io/) json into a single fully dereferenced object. Acts as the linch pin to the [Fleekjs](https://github.com/fleekjs) environment of micro-utilities.
 
+[![Build Status](https://travis-ci.org/fleekjs/fleek-parser.svg)](https://travis-ci.org/fleekjs/fleek-parser) [![npm](https://img.shields.io/npm/l/express.svg)](https://github.com/fleekjs/fleek-parser/blob/master/LICENSE)  [![Dependencies](https://img.shields.io/david/fleekjs/fleek-parser.svg)](https://david-dm.org/fleekjs/fleek-parser)
+
 `$ npm install fleek-parser`
 
 Beyond basic JSON parse:
