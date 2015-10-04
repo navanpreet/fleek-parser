@@ -142,4 +142,4 @@ console.log(swagger.sanitizedRoutes);
 - [John Hofrichter](https://github.com/johnhof)
 - [Lan Nguyen](https://github.com/lan-nguyen91)
 
-Built and maintained with [<img width="15px" src="http://hart.com/wp-content/themes/hart/img/hart_logo.svg">](http://hart.com/) by the [Hart](http://hart.com/) team
+_Built and maintained with [<img width="15px" src="http://hart.com/wp-content/themes/hart/img/hart_logo.svg">](http://hart.com/) by the [Hart](http://hart.com/) team._
