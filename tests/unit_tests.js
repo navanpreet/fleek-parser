@@ -2,25 +2,15 @@
 
 let mocha   = require('mocha');
 let expect  = require('chai').expect;
-let parse   = require('./../lib/parser');
+let parser  = require('./../lib/parser');
 let _       = require('lodash');
-
-// TODO: make into unit test
-
-let result = 'fail';
-// result = swag.find('test.foo')
-// result = swag.find('test.foo[0]')
-// result = swag.find('test.foo[0][0]result')
-// result = swag.find('test.foo[0][1]result')
-// result = swag.find('test.foo[2]')
-// result = swag.find('test.bar')
 
 describe('Unit Tests', function () {
 
   describe('Utils', function () {
 
     describe('.find', function () {
-      let swag   = parse('./tests/swagger.json');
+      let swag   = parser.parse('./tests/swagger.json');
       swag.test  = {
         foo : [
           [{ result : 'success 1' }, { result: 'success 2' }],
@@ -64,7 +54,7 @@ describe('Unit Tests', function () {
 
 
     describe('.routeSet', function () {
-      let swag          = parse('./tests/swagger.json');
+      let swag          = parser.parse('./tests/swagger.json');
       let routes        = swag.routeSet();
       let shouldAllHave = function (key, type) {
         _.each(routes, function (val) {
