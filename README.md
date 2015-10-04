@@ -127,13 +127,13 @@ console.log(swagger.sanitizedRoutes);
 
 ## Reference Material
 
-### Swagger
+#### Swagger
 
 - [Home](http://swagger.io/)
 - [Editor Demo](http://editor.swagger.io/)
 - [Documentation](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md)
 
-## By the authors
+#### By the authors
 
 - [Hart Engineering](http://engineering.hart.com/)
 
@@ -141,3 +141,5 @@ console.log(swagger.sanitizedRoutes);
 
 - [John Hofrichter](https://github.com/johnhof)
 - [Lan Nguyen](https://github.com/lan-nguyen91)
+
+Built and maintained with [<img width="15px" src="http://hart.com/wp-content/themes/hart/img/hart_logo.svg">](http://hart.com/) by the [Hart](http://hart.com/) team
