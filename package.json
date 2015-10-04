@@ -1,6 +1,6 @@
 {
   "name": "fleek-parser",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A parser for the fleek framework",
   "main": "lib/parser.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "swagger"
   ],
   "engines": {
-    "node": ">= 0.11.16"
+    "node": ">= 0.12.0"
   },
   "license": "MIT",
   "dependencies": {
