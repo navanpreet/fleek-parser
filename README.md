@@ -9,7 +9,7 @@ Parser module that parses [swagger documentation](http://swagger.io/) json into 
 Beyond basic JSON parse:
   - Render all `$ref` within the JSON
   - Render all `$ref` referring to a separate file - **TODO**
-  - Merge `allOf` objects - **TODO**
+  - Merge `allOf` objects
   - provide various utilities to access the Swagger document in a non-standard way
 
 ## Key
