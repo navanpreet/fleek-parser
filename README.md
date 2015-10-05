@@ -1,15 +1,15 @@
 # Fleek Parser
 
-Parser module that parses [swagger documentation](http://swagger.io/) json into a single fully dereferenced object. Acts as the linch pin to the [Fleekjs](https://github.com/fleekjs) environment of micro-utilities.
-
 [![Build Status](https://travis-ci.org/fleekjs/fleek-parser.svg)](https://travis-ci.org/fleekjs/fleek-parser) [![npm](https://img.shields.io/npm/l/express.svg)](https://github.com/fleekjs/fleek-parser/blob/master/LICENSE)  [![Dependencies](https://img.shields.io/david/fleekjs/fleek-parser.svg)](https://david-dm.org/fleekjs/fleek-parser) [![Join the chat at https://gitter.im/fleekjs/fleek-parser](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/fleekjs/fleek-parser?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+Parser module that parses [swagger documentation](http://swagger.io/) json into a single fully dereferenced object. Acts as the linch pin to the [Fleekjs](https://github.com/fleekjs) environment of micro-utilities.
 
 `$ npm install fleek-parser`
 
 Beyond basic JSON parse:
   - Render all `$ref` within the JSON
-  - Render all `$ref` referring to a separate file - TODO
-  - Merge `allOf` objects - TODO
+  - Render all `$ref` referring to a separate file - **TODO**
+  - Merge `allOf` objects - **TODO**
   - provide various utilities to access the Swagger document in a non-standard way
 
 ## Key
