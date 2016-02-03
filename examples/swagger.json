@@ -101,7 +101,7 @@
         }
       }
     },
-    "/user/:id": {
+    "/user/{id}": {
       "get": {
         "description": "Return summary of the user",
         "tags": ["user"],
