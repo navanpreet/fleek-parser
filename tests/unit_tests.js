@@ -54,7 +54,8 @@ describe('Unit Tests', function () {
 
 
     describe('.routeSet', function () {
-      let swag          = parser.parse('./tests/swagger.json');
+      let spec          = require('./swagger.json');
+      let swag          = parser.parse(spec);
       let routes        = swag.routeSet();
       let shouldAllHave = function (key, type) {
         _.each(routes, function (val) {
@@ -66,7 +67,18 @@ describe('Unit Tests', function () {
         expect(routes).to.be.an('array');
       });
 
-      describe('.path', function () { it('is string', function () { shouldAllHave('path', 'string'); }); });
+      describe('.path', function () {
+        it('is string', function () { shouldAllHave('path', 'string'); });
+        it('should have converted params', function () {
+          let specPaths = _.keys(spec.paths);
+          expect(specPaths).to.contain('/user/{id}');
+          expect(specPaths).to.not.contain('/user/:id');
+
+          let parsedPaths = _.map(routes, function (route) { return route.path; });
+          expect(parsedPaths).to.contain('/user/:id');
+          expect(parsedPaths).to.not.contain('/user/{id}');
+        });
+      });
       describe('.method', function () { it('is string', function () { shouldAllHave('method', 'string'); }); });
       describe('.controller', function () { it('is string', function () { shouldAllHave('controller', 'string'); }); });
       describe('.details', function () { it('is object', function () { shouldAllHave('details','object'); }); });
