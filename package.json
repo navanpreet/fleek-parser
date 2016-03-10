@@ -19,8 +19,11 @@
   "license": "MIT",
   "dependencies": {
     "deasync": "^0.1.0",
+    "defaults-deep": "^0.2.3",
     "json-refs": "^1.0.2",
     "lodash": "^3.10.0",
+    "merge-defaults": "^0.2.1",
+    "object-search": "0.0.5",
     "traverse": "^0.6.6"
   },
   "devDependencies": {
